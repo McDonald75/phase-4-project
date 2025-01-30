@@ -1,0 +1,13 @@
+.addproduce {
+
+}
+.addproduce .footer{
+    position: fixed;
+}
+.addproduce .container {
+    /* border: 2px solid red; */
+}
+.addproduce .login{
+    /* border: 2px solid red; */
+    height: 80vh;
+}
