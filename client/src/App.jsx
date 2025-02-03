@@ -24,7 +24,8 @@ function App() {
      {gHead.loading && <div style={{
       position:'absolute',
       bottom:'30px',
-      right:'20%'
+      right:'20%',
+
      }}>loading ...</div>}
    <Routes>
      <Route path='/' element={<Dashboard/>}/>
@@ -35,6 +36,12 @@ function App() {
   ) :
    (
     <div>
+      {gHead.loading && <div style={{
+      position:'absolute',
+      bottom:'30px',
+      right:'20%',
+
+     }}>loading ...</div>}
       {/* <Orders/> */}
    <Routes>
      <Route path='/' element={<LogIn/>}/>
