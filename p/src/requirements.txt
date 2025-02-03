@@ -4,3 +4,4 @@ flask_cors
 flask_migrate
 sqlalchemy
 sqlalchemy_serializer
+python-dotenv
