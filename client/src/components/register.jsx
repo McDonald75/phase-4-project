@@ -40,6 +40,7 @@ const Register = () => {
   const register = () => {
     if(!name || !email || !phone || !password) return alert('missing fields')
     if (password != confirmPassword) return alert('password must match')
+      addGHead('loading', true)
 
       actionRequest({endPoint:`${appConfig.api.API_URL}user/register`, params:{
         name,
@@ -54,7 +55,10 @@ const Register = () => {
       }).catch((err)=>{
         alert(err.message)
         
-      })
+      }).finally(()=>{
+        addGHead('loading', false)
+
+        })
   };
   return (
     <div className="login">

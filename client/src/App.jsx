@@ -21,6 +21,11 @@ function App() {
     <div>
      { gHead.orders && <Orders/>}
      {gHead.cart && <Cart/>}
+     {gHead.loading && <div style={{
+      position:'absolute',
+      bottom:'30px',
+      right:'20%'
+     }}>loading ...</div>}
    <Routes>
      <Route path='/' element={<Dashboard/>}/>
      <Route path='/update' element={<AddProduce/>}/>

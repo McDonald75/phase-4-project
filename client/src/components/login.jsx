@@ -16,6 +16,7 @@ const LogIn = ()=>{
     const navigate = useNavigate()
     const handleLogIn = () => {
         if(!email || !password) return alert('missing fields')
+        addGHead('loading', true)
           actionRequest({endPoint:`${appConfig.api.API_URL}user/auth`, params:{
             email,
             password,
@@ -30,7 +31,10 @@ const LogIn = ()=>{
           }).catch((err)=>{
             alert(err)
             
-          })
+          }).finally(()=>{
+            addGHead('loading', false)
+    
+            })
       };
     return(
         <div className="login">

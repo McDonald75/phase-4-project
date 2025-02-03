@@ -25,6 +25,8 @@ const ProduceForm = () => {
   const actionSaveProduct = () => {
     if (!name || !description || !price_per_unit || !quantity || !image)
       return alert("you must privide all fields");
+    addGHead('loading', true)
+
     actionRequest({
       endPoint: `${appConfig.api.API_URL}products`,
       params: {
@@ -40,7 +42,10 @@ const ProduceForm = () => {
       navigate('/')
     }).catch(err=>{
       alert(err.message)
-    });
+    }).finally(()=>{
+      addGHead('loading', false)
+
+      });
   };
   return (
     <div className="login produceform">

@@ -14,12 +14,16 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const {actionRequest} = usePostApi()
   useEffect(()=>{
+    addGHead('loading', true)
     actionRequest({endPoint:`${appConfig.api.API_URL}products/all`}).then(res=>{
       setProducts(res.data)
     }).catch(err=>{
       console.log(err)
       alert('error getting products')
-    })
+    }).finally(()=>{
+      addGHead('loading', false)
+
+      })
 
   },[])
 

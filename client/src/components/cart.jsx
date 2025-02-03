@@ -16,6 +16,7 @@ const Cart = ()=>{
     },[])
 
     const actionCheckOut = ()=>{
+        addGHead('loading', true)
         actionRequest({endPoint:`${appConfig.api.API_URL}orders`, params:{
             user_id:gHead.user.id,
             quantity_ordered:1,
@@ -26,6 +27,9 @@ const Cart = ()=>{
             addGHead('cart', false)
         }).catch(res=>{
             alert('error on order')
+        }).finally(()=>{
+        addGHead('loading', false)
+
         })
     }
 
