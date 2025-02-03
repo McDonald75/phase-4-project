@@ -5,3 +5,4 @@ flask_migrate
 sqlalchemy
 sqlalchemy_serializer
 python-dotenv
+gunicorn
