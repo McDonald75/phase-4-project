@@ -76,7 +76,7 @@ const Cart = ()=>{
                         marginTop:'-15px'
                     }}><span style={{
                         fontSize:'30px'
-                    }}>{gHead.cartList.reduce((accumulator, item) => {
+                    }}>{gHead.cartList?.reduce((accumulator, item) => {
                         return accumulator + (item.price_per_unit * item.count);
                       }, 0)}</span>Ksh</h5>
                     <div className='button'
