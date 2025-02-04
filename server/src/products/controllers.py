@@ -24,16 +24,20 @@ def get_products():
 def get_product(product_id):
     product = Product.query.get_or_404(product_id)
     return jsonify(product.to_dict())
-
+def get_products_by_merchant(id):
+    if not id : return jsonify({'message':'you must provide farmer id'}), 400
+    products = Product.query.filter_by(user_id=id)
+    return jsonify({'message':'farmer products', 'data':[product.to_dict() for product in products]}),200
+    
 def delete_product(product_id):
+    print(product_id)
     product = Product.query.get_or_404(product_id)
     db.session.delete(product)
     db.session.commit()
     return jsonify({'message': 'Product deleted'}), 200
 
-def update_product(product_id):
-    product = Product.query.get_or_404(product_id)
-    data = request.get_json()
+def update_product(data):
+    product = Product.query.get_or_404(data.get('id'))
     
     product.name = data.get('name', product.name)
     product.na = data.get('na', product.na)
@@ -43,3 +47,8 @@ def update_product(product_id):
 
     db.session.commit()
     return jsonify(product.to_dict())
+def update_product_name(data):
+    product = Product.query.get_or_404(data.get('id'))
+    product.name = data.get('name', product.name)
+    db.session.commit()
+    return jsonify({'message':'product updated', 'data':product.to_dict()})

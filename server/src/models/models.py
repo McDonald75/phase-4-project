@@ -59,6 +59,7 @@ class Product(db.Model, SerializerMixin):
             'description': self.description,
             'price_per_unit': self.price_per_unit,
             'quantity_available': self.quantity_available,
+            'na':self.na
         }
 
     def __repr__(self):
@@ -83,6 +84,7 @@ class Order(db.Model, SerializerMixin):
             'quantity_ordered': self.quantity_ordered,
             'total_price': self.total_price,
             'status': self.status,
+            'products': [product.to_dict() for product in self.products] 
         }
 
     def __repr__(self):

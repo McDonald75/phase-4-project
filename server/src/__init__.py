@@ -9,11 +9,14 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app(config_mode):
+    # print(config_mode)
     app = Flask(__name__)
     # CORS(app)
     CORS(app)
     app.config.from_object(config[config_mode])
     # print(config.get('development'))
+    # print(config[config_mode].SQLALCHEMY_DATABASE_URI)
+    
 
     db.init_app(app)
     migrate.init_app(app, db)
