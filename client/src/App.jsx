@@ -12,21 +12,28 @@ import LogIn from './components/login'
 import Register from './components/register'
 import AddProduce from './components/addProduce'
 import { useGiraf } from './context'
+import AlertBox from './components/alert'
+import Cookies from 'js-cookie'
 
 function App() {
   const [count, setCount] = useState(0)
   const {gHead, addGHead} = useGiraf()
+  useEffect(()=>{
+    let user = Cookies.get('user')
+    if(user){
+      let userd = JSON.parse(user)
+      addGHead('user', userd)
+      addGHead("loggedIn", true)
+    }
+  },[])
  
   return gHead.loggedIn ? (
     <div>
      { gHead.orders && <Orders/>}
      {gHead.cart && <Cart/>}
-     {gHead.loading && <div style={{
-      position:'absolute',
-      bottom:'30px',
-      right:'20%',
-
-     }}>loading ...</div>}
+     {gHead.loading && <div className='loading'>loading ...</div>}
+     {gHead.pushMessage && <AlertBox text={gHead.pm} type={gHead.pt}/>
+     }
    <Routes>
      <Route path='/' element={<Dashboard/>}/>
      <Route path='/update' element={<AddProduce/>}/>
@@ -36,12 +43,9 @@ function App() {
   ) :
    (
     <div>
-      {gHead.loading && <div style={{
-      position:'absolute',
-      bottom:'30px',
-      right:'20%',
+      {gHead.loading && <div  className='loading'>loading ...</div>}
+     {gHead.pushMessage && <AlertBox text={gHead.pm} type={gHead.pt}/>}
 
-     }}>loading ...</div>}
       {/* <Orders/> */}
    <Routes>
      <Route path='/' element={<LogIn/>}/>

@@ -4,9 +4,11 @@ import { useGiraf } from '../context'
 import { useNavigate } from 'react-router'
 import usePostApi from '../hooks/postapi'
 import appConfig from '../config'
+import usePushMessage from '../hooks/pushmessage'
 const Cart = ()=>{
     const [string, setString] = useState("shellton")
     const [cartList, setCartList] = useState([])
+    const {pushMessage} = usePushMessage()
     const {gHead, addGHead} = useGiraf()
     const {actionRequest} = usePostApi()
     const navigate = useNavigate()
@@ -23,10 +25,15 @@ const Cart = ()=>{
             total_price: 8,
             status:'PENDING'
         }}).then(res=>{
-            alert('order created')
+            pushMessage(res.message, 'success')
+            console.log(res)
             addGHead('cart', false)
-        }).catch(res=>{
-            alert('error on order')
+            addGHead('cartList', [])
+            addGHead('cartItems', 0)
+        }).catch(err=>{
+            console.log(err)
+            pushMessage(err.messagse, 'error')
+
         }).finally(()=>{
         addGHead('loading', false)
 
@@ -47,7 +54,7 @@ const Cart = ()=>{
                         height:'80px'
                     }}></div>
                     {
-                        cartList.map(l=>{
+                        cartList?.map(l=>{
                             return(
                                 <div key={l.id} className='catLister'>
                                     <div className='clImage'></div>

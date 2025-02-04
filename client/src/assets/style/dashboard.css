@@ -164,3 +164,18 @@ input{
     cursor: pointer;
     outline: none;
 }
+.edit_holders{
+    /* border: 2px solid red; */
+    width: 100%;
+    color: rgb(36, 36, 36);
+    font-size: 14px;
+
+}
+.edit_holders .icon{
+    margin-left: 10px;
+    font-size: 20px;
+    /* border: 1px solid rgb(21, 21, 21); */
+    background-color: rgb(227, 227, 227);
+    padding: 10px;
+    border-radius: 100%;
+}

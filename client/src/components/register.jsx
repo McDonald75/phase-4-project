@@ -10,6 +10,8 @@ import AlertBox from "./alert";
 import usePostApi from "../hooks/postapi";
 import appConfig from "../config";
 import { useGiraf } from "../context";
+import usePushMessage from "../hooks/pushmessage";
+import Cookies from 'js-cookie'
 const Register = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState();
@@ -23,6 +25,7 @@ const Register = () => {
   const [role, setRole] = useState('BUYER')
   const {actionRequest} = usePostApi()
   const {gHead, addGHead} = useGiraf()
+  const {pushMessage} = usePushMessage()
 
   const alertBox = (type, message) => {
     type == "error" ? setError(true) : setSuccess(true);
@@ -49,11 +52,15 @@ const Register = () => {
         password,
         role
       }}).then((res)=>{
-        alert(res.message)
+        pushMessage(res.message, 'success')
         addGHead('loggedIn', true)
+        addGHead('user', res.data)
+        Cookies.set("user", JSON.stringify(res.data))
+
         navigate('/')
       }).catch((err)=>{
-        alert(err.message)
+        // alert(err.message)
+        pushMessage(err.message, 'error')
         
       }).finally(()=>{
         addGHead('loading', false)

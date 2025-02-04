@@ -11,7 +11,7 @@ function useGetApi() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { gHead, addGHead } = useGiraf();
-    const headerConfig = { "x-api-key": API_KEY, Authorization: gHead.auth_token, "Content-Type": "application/json" };
+    const headerConfig = { Authorization: gHead.auth_token, "Content-Type": "application/json" };
 
     const actionRequest = async ({ endPoint, params, hd }) => {
         setError(null);

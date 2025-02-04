@@ -1,20 +1,20 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useGiraf } from "../context";
 
 const usePushMessage = () => {
-  const [messageType, setMessageType] = useState('');
-  const [response, setResponse] = useState(null);
-
+  const {gHead, addGHead} = useGiraf();
   const pushMessage = (message, type) => {
-    setMessageType(type);
-    setResponse(message);
+    addGHead("pushMessage", true);
+    addGHead('pm', message)
+    addGHead('pt', type)
     setTimeout(() => {
-      setResponse(null);
+      addGHead("pushMessage", false);
+      addGHead('pm', '')
+      addGHead('pt', '')
     }, 3000);
   };
 
   return {
-    messageType,
-    response,
     pushMessage,
   };
 };
